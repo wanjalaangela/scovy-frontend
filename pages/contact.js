@@ -63,7 +63,7 @@ export default function Contact() {
                 </div>
                 <div>
                   <h3 className="font-black text-[#0D0D3B] text-sm mb-1">Visit Us</h3>
-                  <p className="text-gray-500 text-sm">Nairobi, Kenya</p>
+                  <p className="text-gray-500 text-sm">Mombasa, Kenya</p>
                 </div>
               </div>
 
@@ -75,8 +75,8 @@ export default function Contact() {
                 </div>
                 <div>
                   <h3 className="font-black text-[#0D0D3B] text-sm mb-1">Call Us</h3>
-                  <p className="text-gray-500 text-sm">+254 700 000 000</p>
-                  <p className="text-gray-500 text-sm">+254 711 000 000</p>
+                  <p className="text-gray-500 text-sm">+254 715 277 636</p>
+                  <p className="text-gray-500 text-sm">+254 798 555 268</p>
                 </div>
               </div>
 
@@ -88,8 +88,8 @@ export default function Contact() {
                 </div>
                 <div>
                   <h3 className="font-black text-[#0D0D3B] text-sm mb-1">Email Us</h3>
-                  <p className="text-gray-500 text-sm">info@scovyimports.com</p>
-                  <p className="text-gray-500 text-sm">sales@scovyimports.com</p>
+                  <p className="text-gray-500 text-sm">importsscovi@gmail.com</p>
+                  <p className="text-gray-500 text-sm">imbangwadaniel@gmail.com</p>
                 </div>
               </div>
 

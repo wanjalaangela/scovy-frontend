@@ -44,9 +44,9 @@ export default function Footer() {
               CONTACT
             </h4>
             <ul className="space-y-3 text-sm mt-3">
-              <li className="flex items-start gap-3"><span className="text-red-500">📍</span><span>Nairobi, Kenya</span></li>
-              <li className="flex items-start gap-3"><span className="text-red-500">📞</span><span>+254 700 000 000</span></li>
-              <li className="flex items-start gap-3"><span className="text-red-500">✉️</span><span>info@scovyimports.com</span></li>
+              <li className="flex items-start gap-3"><span className="text-red-500">📍</span><span>Mombasa, Kenya</span></li>
+              <li className="flex items-start gap-3"><span className="text-red-500">📞</span><span>+254 715 277 636</span></li>
+              <li className="flex items-start gap-3"><span className="text-red-500">✉️</span><span>importsscovi@gmail.com</span></li>
               <li className="flex items-start gap-3"><span className="text-red-500">🕐</span><span>Mon–Sat: 8am – 6pm</span></li>
             </ul>
           </div>
