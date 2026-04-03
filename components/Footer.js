@@ -55,7 +55,7 @@ export default function Footer() {
 
         <div className="border-t border-[#1A1A6E] mt-10 pt-6 flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-gray-600">
           <p>© {new Date().getFullYear()} Scovy Imports. All rights reserved.</p>
-          <p>Nairobi, Kenya</p>
+          <p>Mombasa, Kenya</p>
         </div>
 
       </div>
