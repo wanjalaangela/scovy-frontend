@@ -19,11 +19,10 @@ export default function Preferences() {
     notes: '',
   });
   const [loading, setLoading] = useState(false);
-  const [submitted, setSubmitted] = useState(false);
   const [error, setError] = useState('');
+  const [showSuccess, setShowSuccess] = useState(false);
 
   const resetForm = () => {
-    setSubmitted(false);
     setFormData({
       full_name: '',
       email: '',
@@ -64,7 +63,9 @@ export default function Preferences() {
     setLoading(true);
     try {
       await api.post('/api/preferences/', formData);
-      setSubmitted(true);
+      setShowSuccess(true);
+      resetForm();
+      setTimeout(() => setShowSuccess(false), 5000);
     } catch (err) {
       setError('Something went wrong. Please try again.');
     } finally {
@@ -72,41 +73,39 @@ export default function Preferences() {
     }
   };
 
-  if (submitted) {
-    return (
-      <div className="min-h-screen bg-white flex items-center justify-center px-4">
-        <div className="text-center max-w-md">
-          <div className="w-20 h-20 bg-green-50 rounded-full flex items-center justify-center mx-auto mb-6">
-            <span className="text-4xl">✅</span>
-          </div>
-          <h2 className="text-3xl font-black text-[#0D0D3B] mb-3">
-            We Got Your Request!
-          </h2>
-          <p className="text-gray-500 leading-relaxed mb-8">
-            Thank you {formData.full_name.split(' ')[0]}. Our team will review your
-            preferences and get back to you shortly with the best options available.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-3 justify-center">
-            <Link
-              href="/cars"
-              className="bg-red-600 hover:bg-red-700 text-white px-8 py-3.5 font-bold text-sm tracking-widest rounded-xl transition-colors"
-            >
-              BROWSE CARS
-            </Link>
-            <button
-              onClick={resetForm}
-              className="border-2 border-gray-200 hover:border-red-300 text-gray-600 px-8 py-3.5 font-bold text-sm tracking-widest rounded-xl transition-colors"
-            >
-              SUBMIT ANOTHER
-            </button>
-          </div>
-        </div>
-      </div>
-    );
-  }
-
   return (
     <div className="min-h-screen bg-white">
+
+      {/* SUCCESS POPUP */}
+      {showSuccess && (
+        <div className="fixed top-6 right-6 z-50 max-w-sm w-full">
+          <div className="bg-white border border-green-200 rounded-2xl shadow-2xl p-5 flex items-start gap-4">
+            <div className="w-10 h-10 bg-green-100 rounded-full flex items-center justify-center flex-shrink-0">
+              <svg className="w-5 h-5 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+              </svg>
+            </div>
+            <div className="flex-1">
+              <p className="font-black text-[#0D0D3B] text-sm">Preferences Submitted!</p>
+              <p className="text-gray-500 text-xs mt-1 leading-relaxed">
+                Thank you. Our team will review your preferences and get back to you within 24 hours.
+              </p>
+            </div>
+            <button
+              onClick={() => setShowSuccess(false)}
+              className="text-gray-300 hover:text-gray-500 transition-colors flex-shrink-0"
+            >
+              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+              </svg>
+            </button>
+          </div>
+          {/* Progress bar */}
+          <div className="mt-1 h-0.5 bg-green-200 rounded-full overflow-hidden">
+            <div className="h-full bg-green-500 rounded-full animate-[shrink_5s_linear_forwards]" />
+          </div>
+        </div>
+      )}
 
       {/* PAGE HEADER */}
       <div className="bg-[#0D0D3B] text-white py-12">
@@ -134,12 +133,8 @@ export default function Preferences() {
 
           {/* CONTACT DETAILS */}
           <div>
-            <h2 className="text-lg font-black text-[#0D0D3B] mb-1">
-              Your Contact Details
-            </h2>
-            <p className="text-gray-400 text-sm mb-5">
-              So we can get back to you with options.
-            </p>
+            <h2 className="text-lg font-black text-[#0D0D3B] mb-1">Your Contact Details</h2>
+            <p className="text-gray-400 text-sm mb-5">So we can get back to you with options.</p>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
               <div>
                 <label className="block text-xs font-bold text-gray-500 tracking-wider uppercase mb-2">
@@ -187,12 +182,8 @@ export default function Preferences() {
 
           {/* BUDGET */}
           <div>
-            <h2 className="text-lg font-black text-[#0D0D3B] mb-1">
-              Budget Range
-            </h2>
-            <p className="text-gray-400 text-sm mb-5">
-              In Kenyan Shillings. Leave blank if flexible.
-            </p>
+            <h2 className="text-lg font-black text-[#0D0D3B] mb-1">Budget Range</h2>
+            <p className="text-gray-400 text-sm mb-5">In Kenyan Shillings. Leave blank if flexible.</p>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div>
                 <label className="block text-xs font-bold text-gray-500 tracking-wider uppercase mb-2">
@@ -227,12 +218,8 @@ export default function Preferences() {
 
           {/* CAR PREFERENCES */}
           <div>
-            <h2 className="text-lg font-black text-[#0D0D3B] mb-1">
-              Car Preferences
-            </h2>
-            <p className="text-gray-400 text-sm mb-5">
-              Tell us what you have in mind. All fields are optional.
-            </p>
+            <h2 className="text-lg font-black text-[#0D0D3B] mb-1">Car Preferences</h2>
+            <p className="text-gray-400 text-sm mb-5">Tell us what you have in mind. All fields are optional.</p>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
               <div>
@@ -356,9 +343,7 @@ export default function Preferences() {
 
           {/* ADDITIONAL NOTES */}
           <div>
-            <h2 className="text-lg font-black text-[#0D0D3B] mb-1">
-              Anything Else?
-            </h2>
+            <h2 className="text-lg font-black text-[#0D0D3B] mb-1">Anything Else?</h2>
             <p className="text-gray-400 text-sm mb-5">
               Any specific requirements, features, or details we should know about.
             </p>
@@ -376,13 +361,20 @@ export default function Preferences() {
           <button
             type="submit"
             disabled={loading}
-            className={`w-full py-4 font-black text-sm tracking-widest rounded-xl transition-colors ${
+            className={`w-full py-4 font-black text-sm tracking-widest rounded-xl transition-colors flex items-center justify-center gap-3 ${
               loading
                 ? 'bg-gray-300 text-gray-500 cursor-not-allowed'
                 : 'bg-red-600 hover:bg-red-700 text-white'
             }`}
           >
-            {loading ? 'SUBMITTING...' : 'SUBMIT MY PREFERENCES'}
+            {loading ? (
+              <>
+                <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
+                SUBMITTING...
+              </>
+            ) : (
+              'SUBMIT MY PREFERENCES'
+            )}
           </button>
 
           <p className="text-center text-xs text-gray-400">
